@@ -1,1 +1,1 @@
-# knowledge-conflict-entities
+# Finding Entities for Knowledge Conflicts

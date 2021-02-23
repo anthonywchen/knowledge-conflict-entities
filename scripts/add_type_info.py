@@ -12,7 +12,7 @@ print('Loading very large JSON files...')
 WIKIDATA_DIR = 'process_wikidata_dump/processed_files'
 QID_TO_PIDS = json.load(open(join(WIKIDATA_DIR, 'qid_to_pids.json')))
 QID_TO_ALIASES = json.load(open(join(WIKIDATA_DIR, 'qid_to_aliases.json')))
-
+QID_TO_POPULARIITIES = json.load(open(join(WIKIDATA_DIR, 'qid_popularities.json')))
 
 def statistics(output_data):
     """ Prints out top 20 types with counts """
@@ -22,7 +22,7 @@ def statistics(output_data):
         for answer in data_pt['answer_ner']:
             for answer_dict in data_pt['answer_ner'][answer]:
                 for type_dict in answer_dict.get('entity_types', []):
-                    type_counts[type_dict['label']] += 1
+                    type_counts[(type_dict['qid'], type_dict['label'])] += 1
 
     type_counts = sorted(type_counts.items(), key=lambda item: item[1], reverse=True)
     pprint(type_counts[:20])
